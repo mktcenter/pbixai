@@ -1,0 +1,50 @@
+/* styles.css */
+
+/* Botão de navegação moderno */
+.nav-button {
+    padding: 10px 20px;
+    margin: 4px;
+    border: 2px solid #ffffff;
+    background-color: transparent;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.03);
+}
+
+.nav-button.active {
+    background-color: #ffffff;
+    color: #a8a8a8;
+}
+
+/* Botões laterais */
+.sidebar-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: left;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+.sidebar-button.selected {
+    background-color: #ffffff;
+    color: #00afa0;
+    font-weight: bold;
+}
