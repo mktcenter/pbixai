@@ -94,6 +94,7 @@ def gerar_html_relatorio(medidas, tabelas, resumo_medidas, data_geracao=None):
     """
     return html
 
+
 def gerar_html_com_explicacoes(medidas, tabelas, resumo_medidas):
     html = f"""
     <html>
