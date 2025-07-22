@@ -3,6 +3,11 @@ import subprocess
 import json
 import tempfile
 
+# Caminho para o executável do pbi-tools. Permite sobrescrever via variável de
+# ambiente ``PBI_TOOLS_EXE``. Caso não seja definido, assume que ``pbi-tools``
+# está disponível no PATH.
+PBI_TOOLS_EXE = os.getenv("PBI_TOOLS_EXE", "pbi-tools")
+
 def desmontar_pbix_com_pbitools(pbix_path):
     """
     Usa o pbi-tools.exe para extrair o conteúdo do .pbix.
@@ -13,7 +18,7 @@ def desmontar_pbix_com_pbitools(pbix_path):
         print(f"🔧 Executando pbi-tools em: {pbix_path}")
         subprocess.run(
             [
-                r"C:\Users\daniel.motta_beepsau\Downloads\pbi-tools.1.2.0\pbi-tools.exe",
+                PBI_TOOLS_EXE,
                 "extract",
                 pbix_path,
                 "-extractFolder", pasta_destino,
@@ -191,4 +196,25 @@ def encontrar_dax_usadas_em_visuais(pasta_extraida):
                     print(f"⚠️ Erro lendo visual {file}: {e}")
 
     return usados
+
+# ---------------------------------------------------------------------------
+# Funções utilitárias usadas pelo módulo principal
+
+def extract_pbix(pbix_path: str) -> str | None:
+    """Desmonta o arquivo .pbix utilizando o pbi-tools.
+
+    Retorna o caminho da pasta extraída ou ``None`` em caso de erro.
+    """
+    return desmontar_pbix_com_pbitools(pbix_path)
+
+
+def find_model_file(pasta_extraida: str) -> str | None:
+    """Tenta localizar o arquivo do modelo dentro da pasta extraída."""
+    caminho = localizar_model_bim(pasta_extraida)
+    if not caminho:
+        caminho = localizar_database_json(pasta_extraida)
+    if not caminho:
+        caminho = localizar_database_modelo(pasta_extraida)
+    return caminho
+
 

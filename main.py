@@ -1,7 +1,7 @@
 import os
-from .pbix_tools.extractor import extract_pbix, find_model_file, parse_measures
-from .dax_analyzer.explain import explicar_medida_dax
 import json
+from pbix_tools.extractor import extract_pbix, find_model_file, parse_measures
+from dax_analyzer.explain import explicar_medida_dax
 
 def processar_pbix(pbix_path, salvar_em_json=True):
     print(f"🔍 Processando arquivo: {pbix_path}")
@@ -49,5 +49,9 @@ def processar_pbix(pbix_path, salvar_em_json=True):
 
 
 if __name__ == "__main__":
-    caminho_pbix = "samples/exemplo.pbix"  # Altere aqui para o seu arquivo .pbix
-    processar_pbix(caminho_pbix)
+    import sys
+    if len(sys.argv) < 2:
+        print("Uso: python main.py <caminho_arquivo.pbix>")
+    else:
+        caminho_pbix = sys.argv[1]
+        processar_pbix(caminho_pbix)
