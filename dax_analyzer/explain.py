@@ -29,36 +29,17 @@ Lembre que você tem um limite de 300 caracteres para dizer essa explicação.
         return "Erro ao gerar explicação."
 
 def explicar_tabela(nome_tabela, colunas, modelo="mistral"):
-    """
-    Usa IA local via Ollama para gerar uma explicação sobre a função de uma tabela,
-    com base no nome e nas colunas.
-    """
+    """Gera uma breve descrição do papel de uma tabela em um modelo."""
+
     prompt = f"""
-Você é um especialista em modelagem de dados. A seguir, será fornecida uma tabela de um modelo do Power BI. Com base no nome da tabela e nos nomes das colunas, escreva uma frase clara e objetiva que descreva o propósito principal dessa tabela no contexto do negócio.
+Você é um especialista em modelagem de dados. Analise o nome da tabela e a lista
+de colunas a seguir e descreva, em até 300 caracteres, qual é o propósito dessa
+tabela dentro de um modelo do Power BI.
 
-Contexto:
-Os dados são da Beep Saúde, uma startup de saúde com sede no Rio de Janeiro e atuação nacional por meio de hubs de atendimento.
-
-Importante: Considere os seguintes significados para termos frequentes nos nomes das colunas ou tabelas:
-
-HC: Refere-se ao Headcount (contagem de colaboradores), voltado para o RH.
-
-Beep: Refere-se a um chamado de atendimento domiciliar.
-
-Slot: Significa um espaço disponível para ser preenchido por um atendimento.
-
-BU: Unidade de negócio, como Imunizações, Laboratório ou Híbrido.
-
-HUB: Unidade operacional de onde saem os atendimentos.
-
-Campos com técnica se referem ao nome da técnica de enfermagem associada à informação.
-
-Seu objetivo é gerar uma explicação simples, clara e que comunique para que serve a tabela no modelo de dados.
-Tabela: {nome_tabela}
+Nome da Tabela: {nome_tabela}
 Colunas: {', '.join(colunas)}
-
-Explique de forma clara e objetiva.
 """
+
     try:
         resposta = ollama.chat(
             model=modelo,
