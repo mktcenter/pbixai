@@ -6,7 +6,8 @@ import tempfile
 # Caminho para o executável do pbi-tools. Permite sobrescrever via variável de
 # ambiente ``PBI_TOOLS_EXE``. Caso não seja definido, assume que ``pbi-tools``
 # está disponível no PATH.
-PBI_TOOLS_EXE = os.getenv("PBI_TOOLS_EXE", "pbi-tools")
+PBI_TOOLS_EXE = os.getenv("PBI_TOOLS_EXE", "./pbix_tools/pbi-tools.1.2.0/pbi-tools.exe")
+
 
 def desmontar_pbix_com_pbitools(pbix_path):
     """
